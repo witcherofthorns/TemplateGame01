@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GuiWindowsManager : MonoBehaviour
+{
+    #region Singletone
+    private static GuiWindowsManager singletone;
+    public static GuiWindowsManager Instance { get => singletone; }
+    public InventoryWindow InventoryWindow { get => inventoryWindow; set => inventoryWindow = value; }
+
+    private void Awake()
+    {
+        lock (this)
+        {
+            if (singletone == null)
+            {
+                singletone = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else Destroy(this);
+        }
+    }
+    #endregion
+
+    [SerializeField] private InventoryGhostCell ghostCell;
+    [SerializeField] private InventoryWindow inventoryWindow;
+
+    public InventoryWindow WindowInventory { get => inventoryWindow; }
+    public InventoryGhostCell GhostCell { get => ghostCell; }
+    public bool IsActiveGhostCell
+    {
+        get
+        {
+            if(ghostCell)
+            {
+                return ghostCell.isActiveAndEnabled;
+            }
+            return false;
+        }
+    }
+}
