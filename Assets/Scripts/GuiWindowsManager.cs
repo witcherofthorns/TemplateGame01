@@ -24,10 +24,14 @@ public class GuiWindowsManager : MonoBehaviour
     #endregion
 
     [SerializeField] private InventoryGhostCell ghostCell;
+    [SerializeField] private InventoryTooltip tooltip;
     [SerializeField] private InventoryWindow inventoryWindow;
 
     public InventoryWindow WindowInventory { get => inventoryWindow; }
     public InventoryGhostCell GhostCell { get => ghostCell; }
+    public InventoryTooltip Tooltip { get => tooltip; }
+
+
     public bool IsActiveGhostCell
     {
         get
