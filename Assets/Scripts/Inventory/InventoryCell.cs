@@ -50,8 +50,9 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(!GuiWindowsManager.Instance.IsActiveGhostCell)
+        if (!GuiWindowsManager.Instance.IsActiveGhostCell)
         {
+            if (inventory == null || inventory.Items[index] == null) return;
             GuiWindowsManager.Instance.GhostCell.Create(ref inventory, index);
             GuiWindowsManager.Instance.Tooltip.Close();
             inventory.RemoveItem(index);
@@ -78,11 +79,13 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (inventory == null) return;
         if(inventory.Items[index] != null) GuiWindowsManager.Instance.Tooltip.Open(ref inventory.Items[index]);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (inventory == null) return;
         if (inventory.Items[index] != null) GuiWindowsManager.Instance.Tooltip.Close();
     }
 }

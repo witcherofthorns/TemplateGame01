@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7799aa512c4670d49b53a53613cfdf4a, type: 3}
+  m_Name: gold
+  m_EditorClassIdentifier: 
+  itemName: "\u0417\u043E\u043B\u043E\u0442\u043E"
+  itemCount: 1
+  itemSprite: {fileID: 5947598201806246533, guid: c97acdf1d7becb24b8e35711abab9e6a, type: 3}
+  itemDescription: "\u0421\u043B\u0438\u0442\u043E\u043A \u0437\u043E\u043B\u043E\u0442\u0430"

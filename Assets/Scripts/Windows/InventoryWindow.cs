@@ -14,7 +14,7 @@ public class InventoryWindow : Window
 
     public override void Open()
     {
-        bttnCloseWindow.onClick.AddListener(() => { Close(); });
+        if(bttnCloseWindow) bttnCloseWindow.onClick.AddListener(() => { Close(); });
         textInventoryName.text = "NULL";
         gameObject.SetActive(true);
     }
@@ -34,7 +34,7 @@ public class InventoryWindow : Window
         targetInventory.ActionInventoryUseItem += ActionUsedItemCell;
         targetInventory.ActionInventoryRemoveItem += ActionRemoveItemCell;
 
-        bttnCloseWindow.onClick.AddListener(() => { Close(); });
+        if (bttnCloseWindow) bttnCloseWindow.onClick.AddListener(() => { Close(); });
         textInventoryName.text = targetInventory.NameInventory;
 
         for (uint i = 0; i < targetInventory.SizeInventory; i++)
@@ -52,7 +52,7 @@ public class InventoryWindow : Window
         targetInventory.ActionInventoryUseItem -= ActionUsedItemCell;
         targetInventory.ActionInventoryRemoveItem -= ActionRemoveItemCell;
 
-        bttnCloseWindow.onClick.RemoveAllListeners();
+        if (bttnCloseWindow) bttnCloseWindow.onClick.RemoveAllListeners();
         textInventoryName.text = null;
 
         for (uint i = 0; i < cellsPool.Length; i++)

@@ -26,6 +26,11 @@ public class Player : Character, IHitHandler
         PlayerMovement();
     }
 
+    private void FixedUpdate()
+    {
+        PlayerRayCasting();
+    }
+
 
     private void PlayerInit()
     {
@@ -67,7 +72,20 @@ public class Player : Character, IHitHandler
 
         if (hit.collider != null)
         {
+            LootObject tmp_lootobject = null;
+            if (hit.collider.TryGetComponent<LootObject>(out tmp_lootobject))
+            {
+                PlayerLooting(tmp_lootobject);
+            }
             // ...
+        }
+    }
+
+    private void PlayerLooting(LootObject loot)
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, loot.LootInventory);
         }
     }
 

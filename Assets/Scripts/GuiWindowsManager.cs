@@ -25,9 +25,12 @@ public class GuiWindowsManager : MonoBehaviour
 
     [SerializeField] private InventoryGhostCell ghostCell;
     [SerializeField] private InventoryTooltip tooltip;
+
     [SerializeField] private InventoryWindow inventoryWindow;
+    [SerializeField] private LootWindow lootWindow;
 
     public InventoryWindow WindowInventory { get => inventoryWindow; }
+    public LootWindow WindowLoot { get => lootWindow; }
     public InventoryGhostCell GhostCell { get => ghostCell; }
     public InventoryTooltip Tooltip { get => tooltip; }
 
