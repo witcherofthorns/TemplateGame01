@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: "\u0421\u043B\u0438\u0437\u044C"
   itemCount: 1
   itemSprite: {fileID: 7306274148607722714, guid: c97acdf1d7becb24b8e35711abab9e6a, type: 3}
-  itemDescription: 
+  itemDescription: "\u0411\u043E\u0436\u0435, \u0447\u0442\u043E \u044D\u0442\u043E?"

@@ -17,16 +17,11 @@ public class InventoryWindow : Window
         if(bttnCloseWindow) bttnCloseWindow.onClick.AddListener(() => { Close(); });
         textInventoryName.text = "NULL";
         gameObject.SetActive(true);
+        isOpen = true;
     }
 
     public void Open(ref Inventory inventory)
     {
-        if (gameObject.activeInHierarchy)
-        {
-            return;
-        }
-
-
         HideAllCells();
 
         targetInventory = inventory;
@@ -44,6 +39,7 @@ public class InventoryWindow : Window
         }
 
         gameObject.SetActive(true);
+        isOpen = true;
     }
 
     public override void Close()
@@ -63,6 +59,7 @@ public class InventoryWindow : Window
 
         targetInventory = null;
         gameObject.SetActive(false);
+        isOpen = false;
     }
 
     private void HideAllCells()

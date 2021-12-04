@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class GuiWindowsManager : MonoBehaviour
 {
@@ -25,9 +24,9 @@ public class GuiWindowsManager : MonoBehaviour
 
     [SerializeField] private InventoryGhostCell ghostCell;
     [SerializeField] private InventoryTooltip tooltip;
-
     [SerializeField] private InventoryWindow inventoryWindow;
     [SerializeField] private LootWindow lootWindow;
+
 
     public InventoryWindow WindowInventory { get => inventoryWindow; }
     public LootWindow WindowLoot { get => lootWindow; }
@@ -45,5 +44,14 @@ public class GuiWindowsManager : MonoBehaviour
             }
             return false;
         }
+    }
+
+    public bool IsInactiveWindows()
+    {
+        if(!inventoryWindow.IsOpen && !lootWindow.IsOpen)
+        {
+            return true;
+        }
+        return false;
     }
 }

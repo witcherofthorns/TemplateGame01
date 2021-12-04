@@ -52,7 +52,10 @@ public class Player : Character, IHitHandler
         }
         if(Input.GetKeyDown(inventoryKey1) || Input.GetKeyDown(inventoryKey2))
         {
-            GuiWindowsManager.Instance.WindowInventory.Open(ref playerInventory);
+            if (GuiWindowsManager.Instance.IsInactiveWindows())
+            {
+                GuiWindowsManager.Instance.WindowInventory.Open(ref playerInventory);
+            }
         }
         if(Input.GetKeyDown(pickupKey1))
         {
@@ -85,7 +88,10 @@ public class Player : Character, IHitHandler
     {
         if(Input.GetMouseButtonDown(0))
         {
-            GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, loot.LootInventory);
+            if(GuiWindowsManager.Instance.IsInactiveWindows())
+            {
+                GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, loot.LootInventory);
+            }
         }
     }
 

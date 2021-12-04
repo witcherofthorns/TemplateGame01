@@ -15,18 +15,11 @@ public class LootWindow : Window
 
     public void Open(Inventory character, Inventory lootInventory)
     {
-        if(gameObject.activeInHierarchy)
-        {
-            return;
-        }
-
         if (bttnClose) bttnClose.onClick.AddListener(() => { Close(); });
-        characterInventoryWindow.gameObject.SetActive(false);
-        lootInventoryWindow.gameObject.SetActive(false);
         gameObject.SetActive(true);
-
         characterInventoryWindow.Open(ref character);
         lootInventoryWindow.Open(ref lootInventory);
+        isOpen = true;
     }
 
     public override void Close()
@@ -35,5 +28,6 @@ public class LootWindow : Window
         characterInventoryWindow.Close();
         lootInventoryWindow.Close();
         gameObject.SetActive(false);
+        isOpen = false;
     }
 }

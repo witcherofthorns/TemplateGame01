@@ -25,6 +25,11 @@ public class LootObject : MonoBehaviour
         LootCloneOrigialItems();
     }
 
+    private void LootHoverLight()
+    {
+
+    }
+
     private void LootCloneOrigialItems()
     {
         List<InventoryItem> tmp_items = new List<InventoryItem>();
@@ -36,7 +41,9 @@ public class LootObject : MonoBehaviour
                 continue;
             }
 
-            tmp_items.Add(Instantiate(items[i].Item));
+            InventoryItem tmp_item = Instantiate(items[i].Item);
+            tmp_item.ItemCount = items[i].Count;
+            tmp_items.Add(tmp_item);
         }
 
         LootAddItemsInventory(ref tmp_items);

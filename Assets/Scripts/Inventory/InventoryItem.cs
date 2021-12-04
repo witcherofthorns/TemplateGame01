@@ -6,7 +6,7 @@ using UnityEngine;
 public class InventoryItem : ScriptableObject
 {
     [SerializeField] private string itemName;
-    [SerializeField] private uint itemCount;
+    [SerializeField] private uint itemCount = 1;
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private string itemDescription;
 
