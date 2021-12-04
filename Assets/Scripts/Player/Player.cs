@@ -14,6 +14,9 @@ public class Player : Character, IHitHandler
     [SerializeField] private KeyCode inventoryKey1;
     [SerializeField] private KeyCode inventoryKey2;
 
+    private LootObject rayhitLootObject;
+    private bool isCanPickupItems;
+
 
     private void Start()
     {
@@ -38,6 +41,11 @@ public class Player : Character, IHitHandler
         {
             playerCamera.SetLookAt(this.transform);
         }
+
+        if(playerVisibleArea)
+        {
+            StartCoroutine(PlayerCheckItems());
+        }
     }
 
     private void PlayerInputs()
@@ -59,14 +67,13 @@ public class Player : Character, IHitHandler
         }
         if(Input.GetKeyDown(pickupKey1))
         {
-            if(playerVisibleArea)
+            if(isCanPickupItems)
             {
-                if(playerVisibleArea.IsExistDetectItems<ItemObject>())
-                {
-                    PlayerPickUpItems();
-                }
+                PlayerPickUpItems();
             }
         }
+
+        PlayerLooting();
     }
 
     private void PlayerRayCasting()
@@ -78,19 +85,25 @@ public class Player : Character, IHitHandler
             LootObject tmp_lootobject = null;
             if (hit.collider.TryGetComponent<LootObject>(out tmp_lootobject))
             {
-                PlayerLooting(tmp_lootobject);
+                rayhitLootObject = tmp_lootobject;
             }
-            // ...
+            else
+            {
+                rayhitLootObject = null;
+            }
         }
     }
 
-    private void PlayerLooting(LootObject loot)
+    private void PlayerLooting()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (rayhitLootObject != null)
         {
-            if(GuiWindowsManager.Instance.IsInactiveWindows())
+            if (Input.GetMouseButtonDown(0))
             {
-                GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, loot.LootInventory);
+                if (GuiWindowsManager.Instance.IsInactiveWindows())
+                {
+                    GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, rayhitLootObject.LootInventory);
+                }
             }
         }
     }
@@ -118,5 +131,24 @@ public class Player : Character, IHitHandler
     public void OnHit(uint damage)
     {
 
+    }
+
+    private IEnumerator PlayerCheckItems()
+    {
+        while (true)
+        {
+            if (playerVisibleArea.IsExistDetectItems<ItemObject>())
+            {
+                GuiWindowsManager.Instance.SetPlayerActionText($"Press  [ {pickupKey1.ToString()} ]");
+                GuiWindowsManager.Instance.SetPlayerActionTextActivate(true);
+                isCanPickupItems = true;
+            }
+            else 
+            {
+                GuiWindowsManager.Instance.SetPlayerActionTextActivate(false);
+                isCanPickupItems = false;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

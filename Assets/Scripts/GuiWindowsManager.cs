@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class GuiWindowsManager : MonoBehaviour
 {
@@ -22,8 +22,13 @@ public class GuiWindowsManager : MonoBehaviour
     }
     #endregion
 
+    [Header("Objects")]
+    [SerializeField] private GameObject playerObjectText;
+    [SerializeField] private Text playerActionText;
     [SerializeField] private InventoryGhostCell ghostCell;
     [SerializeField] private InventoryTooltip tooltip;
+
+    [Header("Windows")]
     [SerializeField] private InventoryWindow inventoryWindow;
     [SerializeField] private LootWindow lootWindow;
 
@@ -32,6 +37,7 @@ public class GuiWindowsManager : MonoBehaviour
     public LootWindow WindowLoot { get => lootWindow; }
     public InventoryGhostCell GhostCell { get => ghostCell; }
     public InventoryTooltip Tooltip { get => tooltip; }
+
 
 
     public bool IsActiveGhostCell
@@ -53,5 +59,15 @@ public class GuiWindowsManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void SetPlayerActionTextActivate(bool active)
+    {
+        playerObjectText.gameObject.SetActive(active);
+    }
+
+    public void SetPlayerActionText(string text)
+    {
+        playerActionText.text = text;
     }
 }
