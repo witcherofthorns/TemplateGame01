@@ -6,20 +6,24 @@ public class AnimationsEnvirovement : MonoBehaviour
 {
     [Header("Parametrs")]
     [SerializeField, Range(0.1f, 1.5f)] private float grassAnimSpeed;
+    [SerializeField, Range(0.1f, 1.5f)] private float waterAnimSpeed;
 
     [Header("Objects")]
     [SerializeField] private GrassEnvirovement[] grass;
+    [SerializeField] private WaterEnvirovement[] waters;
 
 
     private void Start()
     {
         GetEnvirovementObjects();
         StartCoroutine(GrassWindAnimation());
+        StartCoroutine(WaterWindAnimation());
     }
 
     private void GetEnvirovementObjects()
     {
         grass = FindObjectsOfType<GrassEnvirovement>();
+        waters = FindObjectsOfType<WaterEnvirovement>();
     }
 
     IEnumerator GrassWindAnimation()
@@ -31,6 +35,19 @@ public class AnimationsEnvirovement : MonoBehaviour
                 grass[i].FrameAnimator.NextAnimationFrame();
             }
             yield return new WaitForSeconds(grassAnimSpeed);
+        }
+        yield return null;
+    }
+
+    IEnumerator WaterWindAnimation()
+    {
+        while (true)
+        {
+            for (int i = 0; i < waters.Length; i++)
+            {
+                waters[i].FrameAnimator.NextAnimationFrame();
+            }
+            yield return new WaitForSeconds(waterAnimSpeed);
         }
         yield return null;
     }
