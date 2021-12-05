@@ -72,8 +72,6 @@ public class InventoryCell : MonoBehaviour, IPointerClickHandler, IPointerEnterH
                 inventory.AddItem(GuiWindowsManager.Instance.GhostCell.Item, index);
                 GuiWindowsManager.Instance.GhostCell.Remove();
             }
-
-            return;
         }
     }
 

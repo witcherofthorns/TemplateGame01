@@ -58,7 +58,6 @@ public class DayTimeEnvirovement : MonoBehaviour
             DrawDayMaterial();
             yield return new WaitForSeconds(dayTimeSpeed);
         }
-        yield return null;
     }
 
     private void OnValidate()

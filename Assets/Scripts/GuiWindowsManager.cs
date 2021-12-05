@@ -32,13 +32,10 @@ public class GuiWindowsManager : MonoBehaviour
     [SerializeField] private InventoryWindow inventoryWindow;
     [SerializeField] private LootWindow lootWindow;
 
-
     public InventoryWindow WindowInventory { get => inventoryWindow; }
     public LootWindow WindowLoot { get => lootWindow; }
     public InventoryGhostCell GhostCell { get => ghostCell; }
     public InventoryTooltip Tooltip { get => tooltip; }
-
-
 
     public bool IsActiveGhostCell
     {
@@ -51,7 +48,6 @@ public class GuiWindowsManager : MonoBehaviour
             return false;
         }
     }
-
     public bool IsInactiveWindows()
     {
         if(!inventoryWindow.IsOpen && !lootWindow.IsOpen)

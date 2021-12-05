@@ -36,7 +36,6 @@ public class AnimationsEnvirovement : MonoBehaviour
             }
             yield return new WaitForSeconds(grassAnimSpeed);
         }
-        yield return null;
     }
 
     IEnumerator WaterWindAnimation()
@@ -49,6 +48,5 @@ public class AnimationsEnvirovement : MonoBehaviour
             }
             yield return new WaitForSeconds(waterAnimSpeed);
         }
-        yield return null;
     }
 }

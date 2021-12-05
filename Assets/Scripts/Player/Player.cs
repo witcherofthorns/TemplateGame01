@@ -78,7 +78,7 @@ public class Player : Character, IHitHandler
 
     private void PlayerRayCasting()
     {
-        RaycastHit2D hit = Physics2D.Raycast(playerCamera.CurrentCamera.ScreenToWorldPoint(Input.mousePosition), -Vector2.up);
+        RaycastHit2D hit = Physics2D.Raycast(playerCamera.CurrentCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
         if (hit.collider != null)
         {
@@ -92,6 +92,14 @@ public class Player : Character, IHitHandler
                 rayhitLootObject = null;
             }
         }
+        else
+        {
+            if(rayhitLootObject)
+            {
+                rayhitLootObject = null;
+                return;
+            }
+        }
     }
 
     private void PlayerLooting()
@@ -100,14 +108,22 @@ public class Player : Character, IHitHandler
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (GuiWindowsManager.Instance.IsInactiveWindows())
+                GameObject[] tmp_objects = playerVisibleArea.GetArrayObjects;
+                LootObject tmp_item = null;
+
+                for (int i = 0; i < tmp_objects.Length; i++)
                 {
-                    GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, rayhitLootObject.LootInventory);
+                    if (tmp_objects[i].TryGetComponent<LootObject>(out tmp_item))
+                    {
+                        if (GuiWindowsManager.Instance.IsInactiveWindows())
+                        {
+                            GuiWindowsManager.Instance.WindowLoot.Open(playerInventory, rayhitLootObject.LootInventory);
+                        }
+                    }
                 }
             }
         }
     }
-
 
     private void PlayerPickUpItems()
     {
@@ -125,7 +141,13 @@ public class Player : Character, IHitHandler
 
     private void PlayerMovement()
     {
-        Movement(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+        float hor = Input.GetAxisRaw("Horizontal");
+        float vert = Input.GetAxisRaw("Vertical");
+
+        if(hor != 0 || vert != 0)
+        {
+            Movement(new Vector2(hor, vert));
+        }
     }
 
     public void OnHit(uint damage)
