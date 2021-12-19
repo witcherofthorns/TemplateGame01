@@ -34,7 +34,18 @@ public class MenuRoomWindow : MonoBehaviour
 
     public void StartNetworkClient()
     {
+        StartCoroutine(StartNetworkClientDelay());
+    }
+
+    private IEnumerator StartNetworkClientDelay()
+    {
+        DontDestroyOnLoad(netManager.gameObject);
+        previewStartHost.text = "connection...";
+        yield return new WaitForSeconds(1);
+        previewStartHost.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
         netManager.StartClient();
+        yield return null;
     }
 
     private IEnumerator StartNetworkGameDelay()

@@ -473,9 +473,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 427623833}
-        m_TargetAssemblyTypeName: Mirror.NetworkManager, Mirror
-        m_MethodName: StartClient
+      - m_Target: {fileID: 572036900}
+        m_TargetAssemblyTypeName: MenuRoomWindow, Assembly-CSharp
+        m_MethodName: StartNetworkClient
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -861,7 +861,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a10cd77a5edda8645b6df867cc463e2a, type: 3}
-    m_FontSize: 29
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10

@@ -20,30 +20,23 @@ public class Player : Character, IHitHandler
 
 
 
-
     private void Start()
     {
-        if(hasAuthority)
-        {
-            PlayerInit();
-        }
+        if (!isLocalPlayer) return;
+        PlayerInit();
     }
 
     private void Update()
     {
-        if(isLocalPlayer)
-        {
-            PlayerInputs();
-            PlayerMovement();
-        }
+        if (!isLocalPlayer) return;
+        PlayerInputs();
+        PlayerMovement();
     }
 
     private void FixedUpdate()
     {
-        if (isLocalPlayer)
-        {
-            PlayerRayCasting();
-        }
+        if (!isLocalPlayer) return;
+        PlayerRayCasting();
     }
 
 
@@ -92,13 +85,40 @@ public class Player : Character, IHitHandler
         // for fast close connection client
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            NetworkClient.Disconnect();
+            PlayerStopNetworkConnection();
             Utils.LoadScene("Menu");
             return;
         }
 
         PlayerLooting();
     }
+
+
+
+
+
+    void PlayerStopNetworkConnection()
+    {
+
+        if (NetworkServer.active && NetworkClient.isConnected)
+        {
+            NetworkManager.singleton.StopHost();
+        }
+
+        else if (NetworkClient.isConnected)
+        {
+            NetworkManager.singleton.StopClient();
+        }
+
+        else if (NetworkServer.active)
+        {
+            NetworkManager.singleton.StopServer();
+        }
+    }
+
+
+
+
 
     private void PlayerRayCasting()
     {
@@ -165,6 +185,8 @@ public class Player : Character, IHitHandler
 
     private void PlayerMovement()
     {
+        if (!isLocalPlayer) return;
+
         float hor = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
 
