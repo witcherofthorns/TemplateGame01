@@ -15,7 +15,7 @@ public class GuiWindowsManager : MonoBehaviour
             if (singletone == null)
             {
                 singletone = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
             }
             else Destroy(this);
         }

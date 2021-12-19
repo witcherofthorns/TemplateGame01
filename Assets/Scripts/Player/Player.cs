@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class Player : Character, IHitHandler
 {
@@ -18,25 +19,38 @@ public class Player : Character, IHitHandler
     private bool isCanPickupItems;
 
 
+
+
     private void Start()
     {
-        PlayerInit();
+        if(hasAuthority)
+        {
+            PlayerInit();
+        }
     }
 
     private void Update()
     {
-        PlayerInputs();
-        PlayerMovement();
+        if(isLocalPlayer)
+        {
+            PlayerInputs();
+            PlayerMovement();
+        }
     }
 
     private void FixedUpdate()
     {
-        PlayerRayCasting();
+        if (isLocalPlayer)
+        {
+            PlayerRayCasting();
+        }
     }
 
 
     private void PlayerInit()
     {
+        playerCamera = FindObjectOfType<PlayerCamera>();
+
         if (playerCamera)
         {
             playerCamera.SetLookAt(this.transform);
@@ -46,6 +60,8 @@ public class Player : Character, IHitHandler
         {
             StartCoroutine(PlayerCheckItems());
         }
+
+        Debug.Log("network-welcome: " + netId);
     }
 
     private void PlayerInputs()
@@ -71,6 +87,14 @@ public class Player : Character, IHitHandler
             {
                 PlayerPickUpItems();
             }
+        }
+
+        // for fast close connection client
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            NetworkClient.Disconnect();
+            Utils.LoadScene("Menu");
+            return;
         }
 
         PlayerLooting();
